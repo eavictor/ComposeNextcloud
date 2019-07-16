@@ -13,11 +13,11 @@ services:
       - "3306"
     volumes:
       - type: bind
-        source: /home/mariadb
+        source: /home/ComposeNextcloud/mariadb
         target: /var/lib/mysql
       - type: bind
-        source: /home/mariadb.cnf
-        target: /etc/mysql/my.cnf
+        source: /home/ComposeNextcloud/mariadb.cnf
+        target: /etc/mysql/mysql.conf.d/mysqld.cnf
 
   redis:
     image: redis:5.0.5
@@ -45,5 +45,5 @@ services:
       - "80:80"
     volumes:
       - type: bind
-        source: /home/nextcloud
+        source: /home/ComposeNextcloud/data
         target: /var/www/html
