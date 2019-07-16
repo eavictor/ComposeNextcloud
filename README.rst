@@ -18,7 +18,6 @@ Installation
 
 .. code-block::
 
-    cd ComposeNextcloud
     sudo bash 1_install_docker.sh
 
 3. Edit ``nextcloud.yml``
