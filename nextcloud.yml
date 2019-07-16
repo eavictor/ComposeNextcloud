@@ -1,0 +1,49 @@
+version: "3.7"
+
+services:
+  db:
+    image: mariadb:10.4.6
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=eavictor
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=eavictor
+      - MYSQL_PASSWORD=acgnotamashi
+    ports:
+      - "3306"
+    volumes:
+      - type: bind
+        source: /home/mariadb
+        target: /var/lib/mysql
+      - type: bind
+        source: /home/mariadb.cnf
+        target: /etc/mysql/my.cnf
+
+  redis:
+    image: redis:5.0.5
+    restart: always
+    ports:
+      - "6379"
+
+  nextcloud:
+    image: nextcloud:16.0.3
+    restart: always
+    depends_on:
+      - db
+      - redis
+    environment:
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=eavictor
+      - MYSQL_PASSWORD=acgnotamashi
+      - MYSQL_HOST=db
+      - NEXTCLOUD_ADMIN_USER=eavictor
+      - NEXTCLOUD_ADMIN_PASSWORD=mypassword
+      - NEXTCLOUD_DATA_DIR=/var/www/html/
+      - REDIS_HOST=redis
+      - REDIS_HOST_PORT=6379
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: /home/nextcloud
+        target: /var/www/html
