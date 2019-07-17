@@ -16,9 +16,11 @@ Installation
 
 2. Install Docker
 
+    Note: <username> is for adding user into docker group, don't forget to pass username in
+
 .. code-block::
 
-    sudo bash 1_install_docker.sh
+    sudo bash 1_install_docker.sh <username>
 
 3. Edit ``nextcloud.yml``
 
